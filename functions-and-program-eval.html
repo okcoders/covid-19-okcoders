@@ -1,0 +1,81 @@
+<html>
+	<head>Functions and program eval</head>
+	<body>
+		<div id="names"></div>
+		<script>
+			// Functions and program evaluation
+
+
+			// Pure function: input? => output
+			// Side Effect function: input? => side effect
+			// * random
+			// * Console log
+			// * Mutating data
+			// * Mutating the dom
+
+			// Type signature:
+			// string | number | boolean | object | array | empty | function => string | number | boolean | object | array | empty | function
+
+			// Program evaluation:
+			// Step by step, replace the variables with their values (inside out), starting from eval to assignment
+
+			// Javascript gotchas const, primitive, and object reference/mutation
+
+			const message = 'What is your name?'
+			const names = []
+			const name = prompt(message)
+			// const name = prompt('What is your name?')
+			// const name = 'Zach Mays'
+			// undefined
+
+			function addToNames(name) {
+				names.push(name)
+			}
+
+			function parseFullName(fullName) {
+				const split = fullName.split(' ')
+				// const split = 'Zach Mays'.split(' ')
+				// const split = ['Zach', 'Mays']
+				// undefined
+				return {first: split[0], last: split[1]}
+				// return {first: 'Zach', last: 'Mays'}
+			}
+
+			function fullName(nameObject) {
+				return nameObject.first + ' ' + nameObject.last
+			}
+
+			function addToDom() {
+				const html = `<ul>${names.map(n => `<li>${n.first}</li>`).join('')}</ul>`
+				document.getElementById("names").innerHTML = html
+			}
+
+			addToNames(parseFullName(name))
+			// addToNames(parseFullName('Zach Mays'))
+			// addToNames({first: 'Zach', last: 'Mays'})
+			addToDom()
+			
+			// notes below
+
+			// const name = 'Zach Mays'
+			// const split = name.split(' ')
+
+			// 1 => 'Zach Mays'.split(' ')
+			// 2 => 'Zach Mays'.(function implementation)
+			// 3 => const split = ['Zach', 'Mays']
+			// 4 => assigned a vaue to a variabl
+			// 5 => undefined
+
+			// object => string
+
+			// string => object
+
+			// number | string | undefined | boolean | null | array | object | function => number | string | undefined | boolean | null | array | object | function
+			// doesn't reach outside of it's body
+			// always return the same output, given the same input
+
+
+
+		</script>
+	</body>
+</html>

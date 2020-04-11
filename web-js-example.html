@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Web Js Example</title>
+	</head>
+	<body>
+		<h1>hello world!</h1>
+		<script>
+			const rock = 'rock'
+			const paper = 'paper'
+			const scissor = 'scissor'
+
+			const win = 'win'
+			const tie = 'tie'
+			const lose = 'lose'
+
+			function getRandomInt(min, max) {
+				return Math.floor(Math.random() * (max - min + 1) + min);
+			}
+
+			function generateRandomComputerChoice() {
+				const selection = getRandomInt(1, 3)
+				if (selection === 1) {
+					return rock
+				} else if (selection === 2) {
+					return paper
+				} else {
+					return scissor
+				}
+			}
+
+			function evaluateUserResult(userChoice, computerChoice) {
+				if (userChoice === computerChoice) {
+					return tie
+				} else if (userChoice === rock) {
+					if (computerChoice === paper) {
+						return lose
+					} else if (computerChoice === scissor) {
+						return win
+					}
+				} else if (userChoice === paper) {
+					if (computerChoice === scissor) {
+						return lose
+					} else if (computerChoice === rock) {
+						return win
+					}
+				} else if (userChoice === scissor) {
+					if (computerChoice === rock) {
+						return lose
+					} else if (computerChoice === paper) {
+						return win
+					}
+
+				}
+			}
+
+			// console.log(evaluateUserResult(rock, rock), tie)
+			// console.log(evaluateUserResult(rock, paper), lose)
+			// console.log(evaluateUserResult(rock, scissor), win)
+			// console.log(evaluateUserResult(paper, rock), win)
+			// console.log(evaluateUserResult(paper, paper), tie)
+			// console.log(evaluateUserResult(paper, scissor), lose)
+			// console.log(evaluateUserResult(scissor, rock), lose)
+			// console.log(evaluateUserResult(scissor, paper), win)
+			// console.log(evaluateUserResult(scissor, scissor), tie)
+
+			var userChoice = prompt("rock, paper, or scissors?")
+			var computerChoice = generateRandomComputerChoice()
+			const gameResult = evaluateUserResult(userChoice, computerChoice)
+			console.log("You chose", userChoice)
+			console.log("Computer chose", computerChoice)
+			console.log('so.... you', gameResult)
+		</script>
+	</body>
+</html>
