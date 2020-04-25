@@ -1,0 +1,90 @@
+<!-- 
+- add item to to-do list
+- mark item as complete
+- remove item
+
+- add/render all items to page
+- item mark as complete
+- item delete
+- add item and then re-render
+
+- one style with mutation
+- one without -->
+
+<html>
+  <head>
+    <title>todo list</title>
+  </head>
+  <body>
+    <h3>My to do list</h3>
+    <label>Add Todo</label>
+    <input type="text" id="newTodoItem" />
+    <button id="submitNewTodo" onclick="submitNewTodo()">Submit</button>
+    <div id="content"></div>
+    <script>
+      const todoItem = {
+        name: "learn to code",
+        completed: false,
+      };
+      const todoItems = [];
+
+      function submitNewTodo() {
+        const todoItemElem = document.getElementById("newTodoItem");
+        const todoItemText = todoItemElem.value;
+        todoItemElem.value = "";
+        addTodoToTodoItems(todoItemText);
+        renderTodos();
+	}
+
+      function renderTodos() {
+        const newHtml = todosArrayToHtml();
+        document.getElementById("content").innerHTML = newHtml;
+      }
+
+      function addTodoToTodoItems(todoText) {
+        const newTodoItem = {
+          name: todoText,
+          completed: false,
+        };
+        todoItems.push(newTodoItem);
+      }
+
+      function todosArrayToHtml() {
+        // [{name: 'learn to code', completed: false}, ...]
+        // <ol>
+        // 	<li>Learn to code</li>
+        // 	<li>get some sleep</li>
+        // 	<li>go outside</li>
+        // </ol>
+        var htmlString = "";
+        htmlString += "<ol>";
+        for (var i = 0; i < todoItems.length; i++) {
+          const item = todoItems[i];
+          const itemName = item ? item.name : "empty";
+          htmlString +=
+            "<li " + 'onclick="removeItemFromTodos(' + i + ')"' + ">";
+          htmlString += itemName;
+          htmlString += "</li>";
+        }
+        htmlString += "</ol>";
+        return htmlString;
+      }
+
+      function removeItemFromTodos(index) {
+        todoItems.splice(index, 1);
+        renderTodos();
+      }
+
+      // first goal: add items to above array
+      // create input, hit submit, and then see that item logged to the console
+
+      // second goal: add new todo item to array of todos
+
+      // third goal: display all todo items
+
+      // fourth goal: delete todos
+
+      // fifth goal: mark todos as complete
+    </script>
+  </body>
+</html>
