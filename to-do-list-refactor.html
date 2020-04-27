@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>todo list</title>
+  </head>
+  <body>
+    <h3>My to do list</h3>
+    <label>Add Todo</label>
+    <input type="text" id="newTodoItem" />
+    <button id="submitNewTodo" onclick="submitNewTodo()">Submit</button>
+    <div id="content"></div>
+    <script>
+      // - don't overwrite variables if you can
+        // var testVariableName = 4
+        // testVariableName = 'something different'
+        // let testVariableName = 4
+        // testVariableName = 5
+        // const testVariableName = 4
+        // testVariableName = 5
+        // var data = {...}
+        // const filteredDataByAge = {..}
+      // - don't mutate if you don't have to
+      // - map and filter over forEach/for
+      // - spread object and arrays 
+      // - return data and take in data from functions when you can
+      const todoItems = [];
+
+      function addTodoToTodoItems(todoText) {
+        const newTodoItem = {
+          name: todoText,
+          completed: false,
+        };
+        todoItems.push(newTodoItem);
+      }
+
+      function removeItemFromTodos(index) {
+        todoItems.splice(index, 1);
+        renderTodos();
+      }
+
+      function submitNewTodo() {
+        const todoItemElem = document.getElementById("newTodoItem");
+        const todoItemText = todoItemElem.value;
+        todoItemElem.value = "";
+        addTodoToTodoItems(todoItemText);
+        renderTodos();
+      }
+
+      function todosArrayToHtml(todoItems) {
+        var htmlString = "";
+        htmlString += "<ol>";
+        for (var i = 0; i < todoItems.length; i++) {
+          const item = todoItems[i];
+          const itemName = item ? item.name : "empty";
+          htmlString +=
+            "<li " + 'onclick="removeItemFromTodos(' + i + ')"' + ">";
+          htmlString += itemName;
+          htmlString += "</li>";
+        }
+        htmlString += "</ol>";
+        return htmlString;
+      }
+
+      function renderTodos() {
+        const newHtml = todosArrayToHtml();
+        document.getElementById("content").innerHTML = newHtml;
+      }
+    </script>
+  </body>
+</html>
