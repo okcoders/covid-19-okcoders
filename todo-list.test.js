@@ -12,5 +12,11 @@ console.log('test correct completed: ', secondResult[0].completed === false)
 console.log('test correct name: ', secondResult[1].name === 'go outside')
 console.log('test correct completed: ', secondResult[1].completed === false)
 
-const removeResult = todoListModule.removeItemFromTodos([{name: 'learn to code', completed: false}, {name: 'go outside', completed: false}], 1)
-console.log(removeResult)
+const sampleList = [{name: 'learn to code', completed: false}, {name: 'go outside', completed: false}]
+const removeResult = todoListModule.removeItemFromTodos(sampleList, 1)
+console.log(removeResult.length === 1)
+console.log(removeResult[0].name === 'learn to code')
+console.log(removeResult[0].completed === false)
+
+const removeResultEmpty = todoListModule.removeItemFromTodos([], 1)
+console.log(removeResultEmpty.length === 0)

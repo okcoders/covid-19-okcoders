@@ -11,19 +11,21 @@ function removeItemFromTodos(todoItems, index) {
 }
 
 function todosArrayToHtml(todoItems) {
-	var htmlString = "";
-	htmlString += "<ol>";
-	for (var i = 0; i < todoItems.length; i++) {
-		const item = todoItems[i];
-		const itemName = item ? item.name : "empty";
-		htmlString +=
-		"<li " + 'onclick="removeItemFromTodos(' + i + ')"' + ">";
-		htmlString += itemName;
-		htmlString += "</li>";
-	}
-	htmlString += "</ol>";
-	return htmlString;
+	const htmlListItemsArray = todoItems.map(todo => {
+		return `<li>${todo.name}</li>`
+	})
+
+	const htmlListItems = htmlListItemsArray.join('')
+
+	const htmlString = `
+	  <ol>
+	  ${htmlListItems}
+	  </ol>
+	`
+	return htmlString
 }
+
+todosArrayToHtml([{name: 'learn to code', completed: false}, {name: 'go outside', completed: false}])
 
 module.exports = {
 	addTodoToTodoItems,
