@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  // const anArray = useState('')
-  // const newTodoInput = anArray[0]
-  // const updateNewTodoInput = anArray[1]
-
   const [newTodoInput, updateNewTodoInput] = useState('')
   const [todoList, updateTodoList] = useState([])
 
