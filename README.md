@@ -27,5 +27,5 @@
 
 ## project
 
-- api provided (database and server)
-- blog (create, update, delete posts)
+- api provided (database and server) for you to talk with
+- blog (create, update, delete posts) front end
