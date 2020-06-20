@@ -10,7 +10,7 @@
 npm run setup-mongo
 ```
 
-- if you do not have docker you need to install mongo and get it running: https://docs.mongodb.com/manual/installation/
+- if you do not have docker (try to install it, but if that fails just install mongo directly) you need to install mongo and get it running: https://docs.mongodb.com/manual/installation/
 
 
 - now run the below to get started
