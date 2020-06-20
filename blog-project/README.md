@@ -5,6 +5,7 @@
 - clone this repo `git clone git@github.com:okcoders/covid-19-okcoders.git`
 - ensure your current working directory is blog-project
 - ensure you have docker (https://docs.docker.com/get-docker/) installed, if you do, you can get mongo up and running with the following
+- ensure you have node and npm, if not search in google install nodejs for (your os, so windows, mac, linux)
 
 ```
 npm run setup-mongo
@@ -18,4 +19,9 @@ npm run setup-mongo
 ```
 npm run install-all
 npm start
+```
+- to reset your database run
+
+```
+npm run reset-db
 ```
