@@ -2,7 +2,7 @@
 
 ## getting started
 
-- clone this repo
+- clone this repo `git clone git@github.com:okcoders/covid-19-okcoders.git`
 - ensure your current working directory is blog-project
 - ensure you have docker (https://docs.docker.com/get-docker/) installed, if you do, you can get mongo up and running with the following
 
