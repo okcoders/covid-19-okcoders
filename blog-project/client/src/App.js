@@ -1,55 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import {getPosts, createPost} from './api'
+import {getPosts, createPost, deletePost} from './api'
 
 function App() {
-  const [newTodoInput, updateNewTodoInput] = useState('')
-  const [todoList, updateTodoList] = useState([])
+  const [newPostTitleInput, updateNewPostTitleInput] = useState('')
+  const [newPostAuthorInput, updateNewPostAuthorInput] = useState('')
+  const [newPostBodyInput, updateNewPostBodyInput] = useState('')
+  const [posts, updatePosts] = useState([])
 
   function getAndSetPosts() {
     return getPosts().then(posts => {
-      updateTodoList(posts)
+      updatePosts(posts)
     })
   }
 
   useEffect(() => {getAndSetPosts()} , [])
 
-  function addNewTodo() {
-    const newTodoItem = {
-      name: newTodoInput,
-      completed: false,
+  function addNewPost() {
+    const newPostItem = {
+      title: newPostTitleInput,
+      author: newPostAuthorInput,
+      body: newPostBodyInput
     };
 
-    createPost(newTodoItem).then(() => {
+    createPost(newPostItem).then(() => {
       getAndSetPosts().then(() => {
-        updateNewTodoInput('')
+        updateNewPostTitleInput('')
+        updateNewPostAuthorInput('')
+        updateNewPostBodyInput('')
       })
     })
   }
 
-  function removeTodoByName(name) {
-    const newList = todoList.filter(todo => todo.name !== name)
-    updateTodoList(newList)
+  async function deletePostHandler(id) {
+    await deletePost(id)
+    getAndSetPosts()
   }
 
-  function todoListToHtml() {
-    return todoList.map((todo, i) => {
+  function postsToHtml() {
+    return posts.map((post, i) => {
       return (
-        <li key={i} onClick={() => removeTodoByName(todo.name)}>{todo.name}</li>
+      <li key={i}>
+        <div>
+        Title: {post.title} Author: {post.author}
+        </div>
+        <div>
+          <button onClick={() => deletePostHandler(post._id)}>Delete Post</button>
+        </div>
+        </li>
       )
     })
   }
 
   return (
     <div className="my-app">
-      <h3>My to do list</h3>
-      <label>Add Todo</label>
-      <input type="text" onChange={e => updateNewTodoInput(e.target.value)} value={newTodoInput} />
-      <button onClick={addNewTodo}>Submit</button>
-      <h3>Current Todo List</h3>
-      <ol>
-        {todoListToHtml()}
-      </ol>
+      <h3>Posts</h3>
+      <h5>Add New Blog Post</h5>
+      <label>Title</label>
+      <input type="text" onChange={e => updateNewPostTitleInput(e.target.value)} value={newPostTitleInput} />
+      <label>Author</label>
+      <input type="text" onChange={e => updateNewPostAuthorInput(e.target.value)} value={newPostAuthorInput} />
+      <div>
+        <label>Body</label>
+        <textarea onChange={e => updateNewPostBodyInput(e.target.value)} value={newPostBodyInput}></textarea>
+      </div>
+      <div>
+        <button onClick={addNewPost}>Submit</button>
+      </div>
+      <h3>Current Posts</h3>
+      <ul>
+        {postsToHtml()}
+      </ul>
     </div>
   );
 }

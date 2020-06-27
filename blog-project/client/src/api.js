@@ -14,3 +14,8 @@ export async function getPosts() {
 	const response = await fetch('/posts')
 	return response.json();
 }
+
+export async function deletePost(id) {
+	const response = await fetch(`/posts/${id}`, {method: 'DELETE'})
+	return response.json()
+}
