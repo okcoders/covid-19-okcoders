@@ -14,5 +14,8 @@
     "start": "concurrently --kill-others \"npm run start-server\" \"npm run start-client\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  }
 }
